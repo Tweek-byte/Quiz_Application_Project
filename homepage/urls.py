@@ -3,5 +3,5 @@ from homepage import views
 """Home Page link"""
 
 urlpatterns = [
-    path('', views.home)
+    path('', views.home),
 ]
