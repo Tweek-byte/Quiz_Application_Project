@@ -15,25 +15,19 @@
 
 <body>
     {% include "template_files/navigation.html" %}
-    <div class="container jumbotron-container">
-        <svg class="custom-svg" width="100" height="100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm.5 17h-1v-1h1v1zm1.7-5.294c-.483.308-.7.588-.7 1.294h-1.5c0-1.137.55-1.768 1.294-2.294.573-.395.956-.787.956-1.5 0-.927-.82-1.5-1.5-1.5-.93 0-1.5.635-1.5 1.5H9c0-1.635 1.282-3 3-3s3 1.365 3 3c0 1.21-.738 2.002-1.8 2.706z"/>
-        </svg>
-
-        <h1 class="text-body-emphasis mt-4">Welcome to Quizora!</h1>
+    <div class="container text-center jumbotron-container">
+        <img src="{% static 'images/quizora.svg' %}" alt="Quizora Logo" class="custom-svg" width="300" height="300">
+        <h1 class="text-body-emphasis">Welcome to Quizora!</h1>
         <p class="col-lg-8 mx-auto fs-5 text-muted">
             Challenge your mind, climb the leaderboard, and discover how much you know. Join now and let the games begin!
         </p>
-        <div class="d-inline-flex gap-2 mb-5">
-            <button class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" type="button">
+        <div class="d-inline-flex gap-2">
+            <button class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" type="button" style="margin-top: 20px;">
                 Get Started
-                <svg class="bi ms-2" width="24" height="24"><use xlink:href="#arrow-right-short"></use></svg>
-            </button>
-            <button class="btn btn-outline-secondary btn-lg px-4 rounded-pill" type="button">
-                Learn More
-            </button>
+            </button>            
         </div>
-    </div>
+    </div>    
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
