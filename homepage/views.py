@@ -1,5 +1,5 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 
 def home(request):
     """Home Page Logic"""
-    render(request, 'index.html')
+    return render(request, 'index.html')
