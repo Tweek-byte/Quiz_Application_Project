@@ -16,6 +16,8 @@ db.sqlite3
 # Logs
 *.log
 *.out
+*.pot
+*.pyc
 
 # Virtual environment
 venv/
