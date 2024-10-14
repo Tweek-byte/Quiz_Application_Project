@@ -13,7 +13,7 @@ class Profile(models.Model):
         verbose_name='User_pic'
     )
 
-    email_adress = models.CharField(max_length=55, unique=True, null=True)
+    email_adress = models.CharField(max_length=55, unique=True, null=True, verbose_name='Email')
 
     GENDER = (
         ('Male', 'Male'),
