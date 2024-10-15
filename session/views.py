@@ -59,12 +59,12 @@ def login(request):
         
         if user is not None:
             auth.login(request, user)
-            return (render('profile', username))
+            return (redirect('profile', username))
         else:
             messages.info(request, 'Invalid username or password!')
             return (redirect('login'))
         
-    return render(request, "login.html")
+    return (render(request, "login.html"))
 
 @login_required(login_url='login')
 def logout(request):
