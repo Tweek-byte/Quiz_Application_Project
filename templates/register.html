@@ -11,12 +11,6 @@
       <div class="col-12">
       </div>
       <div class="col-12">
-        <div>
-          {% for message in messages %}
-          <h5 class="text-danger">{{message}}</h5>
-          {% endfor %}
-        </div>
-
         <form method="POST" action="">
           {% csrf_token %}
           <div class="mb-3">
@@ -34,9 +28,14 @@
             <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword2" class="form-label visually-hidden">Repeat Password</label>
-            <input type="password" name="password2" class="form-control" id="exampleInputPassword2" placeholder="Repeat Password" required>
+            <label for="exampleInputconfirm_password" class="form-label visually-hidden">Repeat Password</label>
+            <input type="password" name="confirm_password" class="form-control" id="exampleInputconfirm_password" placeholder="Repeat Password" required>
           </div>
+          <div class="text-start" style="font-size: 0.85rem; color: rgb(199, 4, 4);">
+            {% for message in messages %}
+            <p class="m-3">{{ message }}</p>
+            {% endfor %}
+        </div>
           <button type="submit" class="btn btn-primary">Register</button>
           <p class="my-4">Already a member? <b><a href="login.html">Login</a></b></p>
         </form>

@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Profile(models.Model):
-    """Profile Database logic"""
+    """Profile Database logic."""
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, verbose_name='User_obj')
     
     profile_img = models.ImageField(
