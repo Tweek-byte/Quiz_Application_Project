@@ -15,11 +15,11 @@ def register(request):
 
         if password == confirm_password:
                 if User.objects.filter(username=username).exists():
-                    messages.info(request, "Username already exists")
+                    messages.info(request, "Username already exists! Try Loging in.")
                     return redirect('register')
                 
                 elif User.objects.filter(email=email).exists():
-                    messages.info(request, "Email already exists")
+                    messages.info(request, "Email already exists! Try Loging in.")
                     return redirect('register')
                 else:
                     user = User.objects.create_user(username=username, email=email, password=password)
