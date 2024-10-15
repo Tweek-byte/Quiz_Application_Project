@@ -8,13 +8,14 @@ class Profile(models.Model):
     profile_img = models.ImageField(
         upload_to='profile_images', 
         default='user.svg', 
-        blank=True, 
-        null=True, 
+        blank=True,
+        null=True,
         verbose_name='User_pic'
     )
 
     email_address = models.CharField(max_length=55, unique=True, null=True, verbose_name='Email')
 
+    age = models.PositiveIntegerField(null=True, blank=True, verbose_name='Age')
     GENDER = (
         ('Male', 'Male'),
         ('Female', 'Female'),
