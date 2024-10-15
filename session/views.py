@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from .models import Profile
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     """Signing Up Logic."""
@@ -64,3 +65,8 @@ def login(request):
             return (redirect('login'))
         
     return render(request, "login.html")
+
+@login_required(login_url='login')
+def logout(request):
+    auth.logout(request)
+    return (redirect('login'))
