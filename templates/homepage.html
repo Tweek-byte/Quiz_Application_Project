@@ -9,9 +9,18 @@
     <p class="col-lg-8 mx-auto fs-5 text-muted">
         Challenge your mind, climb the leaderboard, and discover how much you know. Join now and let the games begin!
     </p>
+    {% if request.user.is_authenticated %}
+    <div class="d-inline-flex gap-2">
+        <a href="#"
+        class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill"
+        style="margin-top: 20px;">Take a Quiz</a>
+
+    {% else %}
     <div class="d-inline-flex gap-2">
         <a href="{% url 'register' %}"
         class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill"
-        style="margin-top: 20px;">Get Started</a> 
+        style="margin-top: 20px;">Get Started</a>
+
+    {% endif %}
     </div>
 {% endblock content %}
