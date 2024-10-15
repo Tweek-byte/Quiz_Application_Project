@@ -43,7 +43,7 @@ def register(request):
 @login_required(login_url='login')
 def profile(request, username):
     """Profile Dashboard Logic."""
-    user_obj = User.objects.get(username=username)
+    user_obj = User.objects.get(username=request.user)
     user_profile = Profile.objects.get(user=user_obj)
     
     context = {"user_profile": user_profile}
