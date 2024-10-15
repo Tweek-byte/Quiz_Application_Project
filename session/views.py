@@ -1,5 +1,4 @@
 """Session Management Logic."""
-from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
@@ -39,3 +38,10 @@ def register(request):
 
     context = {}
     return render(request, "register.html", context)
+
+
+def profile(request):
+    """Profile Dashboard Logic."""
+    
+    context = {}
+    return (render(request, 'profile.html', context))
