@@ -47,3 +47,11 @@ def profile(request, username):
     
     context = {"user_profile": user_profile}
     return (render(request, 'profile.html', context))
+
+def login(request):
+
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+
+    return render(request, 'login.html')
