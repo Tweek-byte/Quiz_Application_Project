@@ -40,7 +40,7 @@ def register(request):
     context = {}
     return render(request, "register.html", context)
 
-@login_required(login_url='login')
+@login_required
 def profile(request, username):
     """Profile Dashboard Logic."""
     user_obj = User.objects.get(username=request.user)
@@ -66,7 +66,7 @@ def login(request):
         
     return (render(request, "login.html"))
 
-@login_required(login_url='login')
+@login_required
 def logout(request):
     auth.logout(request)
     return (redirect('login'))
