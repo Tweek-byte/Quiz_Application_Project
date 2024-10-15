@@ -49,7 +49,7 @@ def profile(request, username):
     return (render(request, 'profile.html', context))
 
 def login(request):
-
+    "login Logic."""
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
