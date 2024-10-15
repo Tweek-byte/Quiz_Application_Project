@@ -30,7 +30,7 @@ def register(request):
 
 
                     user_model = User.objects.get(username=username)
-                    new_profile = Profile.objects.create(user=user_model)
+                    new_profile = Profile.objects.create(user=user_model, email_address=email)
                     new_profile.save()
                     return redirect('profile', username)
         else:
