@@ -1,47 +1,61 @@
 {% extends 'index.html' %}
-
+{% load static %}
 {% block content %}
+<div class="container my-5">
+    <h1 class="display-4 text-center mb-4">{{ user_profile.user.username }}'s Profile</h1>
 
-<h1 class="display-4 text-center my-5">{{user_profile.user.username}}'s Profile</h1>
+    <div class="card mx-auto shadow-sm" style="max-width: 600px;">
+        <div class="card-body text-center">
+            <img src="{% static 'images/user.svg' %}" alt="user-profile" class="rounded-circle mb-3" width="140" height="140">
+            <h2 class="fs-3">@{{ user_profile.user.username }}</h2>
 
-<div class="container text-center">
-
-    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-        <a href="#" type="button" class="btn-outline-light">Edit</a>
-        <a href="#" type="button" class="btn btn-outline-danger">Delete</a>
-    </div>
-
-    <div class="container text-center my-4">
-        <div class="row row-cols-sm-1 row-cols-md-2">
-            <div class="col-12">
-                <img src="user.svg" alt="user-profile" class="rounded-circle" width="140" height="140">
-                <h2 class="fs-3">@{{user_profile.user.username}}</h2>
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-6 mb-2">
+                    <p class="fs-5 mb-1">
+                        <i class="bi bi-gender-ambiguous"></i> 
+                        <strong>Gender:</strong> {{ user_profile.gender|default:'N/A' }}
+                    </p>
+                    <p class="fs-5 mb-1">
+                        <i class="bi bi-envelope-at"></i> 
+                        <strong>Email:</strong> 
+                        <a href="mailto:{{ user_profile.user.email }}">
+                            {{ user_profile.user.email|default:'N/A' }}
+                        </a>
+                    </p>
+                </div>
             </div>
-            <div class="col-12">
-                <p class="fs-5"><i class="bi bi-gender-ambiguous"></i> {{user_profile.gender|default:'N/A'}}</p>
-                <p class="fs-5"><i class="bi bi-envelope-at"></i> <a href="mailto:{{user_profile.user.email}}"> {{user_profile.user.email|default:'N/A'}}</a></p>
+
+            <div class="btn-group mt-4" role="group" aria-label="Profile actions">
+                <a href="#" class="btn btn-primary">Edit Profile</a>
+                <a href="#" class="btn btn-danger">Delete Account</a>
             </div>
         </div>
     </div>
 
     <hr class="my-5">
 
-    <div class="container">
-        <div class="row row-cols-sm-1 row-cols-md-1 row-cols-lg-1">
-            <div class="col-12">
-                <h3>Quizzes Done By @{{user_profile.user.username}}</h3>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Quiz</th>
-                            <th scope="col">Score</th>
-                            <th scope="col">Time</th>
-                            <th scope="col">Details</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
+    <div class="card shadow-sm">
+        <div class="card-header text-center bg-dark text-light">
+            <h3>Quizzes Completed by @{{ user_profile.user.username }}</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Quiz</th>
+                        <th scope="col">Score</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td colspan="5" class="text-center">No quizzes completed yet.</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
