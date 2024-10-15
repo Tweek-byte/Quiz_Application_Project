@@ -40,8 +40,10 @@ def register(request):
     return render(request, "register.html", context)
 
 
-def profile(request):
+def profile(request, username):
     """Profile Dashboard Logic."""
+    user_obj = User.objects.get(username=username)
+    user_profile = Profile.objects.get(user=user_obj)
     
-    context = {}
+    context = {"user_profile": user_profile}
     return (render(request, 'profile.html', context))
