@@ -4,45 +4,49 @@
 
 {% block content %}
 
-  <h1 class="display-2 text-center my-5">Sign Up to Quizora</h1>
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="card shadow-sm p-5" style="max-width: 400px; width: 100%;">
+        <h1 class="text-center mb-4 fw-bold">Sign Up</h1>
 
-  <div class="container">
-    <div class="row row-cols-sm-1 row-cols-lg-3 container">
-      <div class="col-12">
-      </div>
-      <div class="col-12">
+        {% if messages %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {% for message in messages %}
+                    {{ message }}<br>
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+
         <form method="POST" action="">
-          {% csrf_token %}
-          <div class="mb-3">
-            <label for="exampleInputUsername1" class="form-label visually-hidden">Username</label>
-            <input type="text" name="username" class="form-control" id="exampleInputUsername1" aria-describedby="emailHelp"
-              placeholder="Username" required>
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail2" class="form-label visually-hidden">Email</label>
-            <input type="email" name="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp"
-              placeholder="Email" required>
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label visually-hidden">Password</label>
-            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputconfirm_password" class="form-label visually-hidden">Repeat Password</label>
-            <input type="password" name="confirm_password" class="form-control" id="exampleInputconfirm_password" placeholder="Repeat Password" required>
-          </div>
-          <div class="text-start" style="font-size: 0.85rem; color: rgb(199, 4, 4);">
-            {% for message in messages %}
-            <p class="m-3">{{ message }}</p>
-            {% endfor %}
-        </div>
-          <button type="submit" class="btn btn-primary">Register</button>
-          <p class="my-4">Already a member? <b><a href="{% url 'login' %}">Login</a></b></p>
+            {% csrf_token %}
+            
+            <div class="form-floating mb-3">
+                <input type="text" name="username" class="form-control" id="usernameInput" placeholder="Username" required>
+                <label for="usernameInput">Username</label>
+            </div>
+            
+            <div class="form-floating mb-3">
+                <input type="email" name="email" class="form-control" id="emailInput" placeholder="Email" required>
+                <label for="emailInput">Email</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" name="password" class="form-control" id="passwordInput" placeholder="Password" required>
+                <label for="passwordInput">Password</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" name="confirm_password" class="form-control" id="confirmPasswordInput" placeholder="Repeat Password" required>
+                <label for="confirmPasswordInput">Confirm Password</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2">Register</button>
+
+            <p class="text-center my-4">Already a member? 
+                <a href="{% url 'login' %}" class="fw-bold text-decoration-none">Login</a>
+            </p>
         </form>
-      </div>
-      <div class="col-12">
-      </div>
     </div>
-  </div>
+</div>
 
 {% endblock content %}
