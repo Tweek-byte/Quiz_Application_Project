@@ -1,0 +1,112 @@
+{% extends 'index.html' %}
+
+{% block title %}{{ quiz.name }} | Quizora{% endblock %}
+
+{% block content %}
+<h1 class="text-center my-4">{{ quiz.name }}</h1>
+<p class="text-center">{{ quiz.description }}</p>
+
+<div class="container">
+    <div class="d-flex justify-content-between mb-4">
+        <span>Quiz created at: {{ quiz.created_at }}</span>
+        <span id="timer">2:00</span>
+    </div>
+
+    <form method="post" id="quiz-form">
+        {% csrf_token %}
+        <input type="hidden" name="score" id="user-score" value="0">
+
+        {% for question in quiz.questions.all %}
+        <div class="card mb-3 question">
+            <div class="card-header">Question {{ forloop.counter }}</div>
+            <div class="card-body">
+                <p>{{ question.text }}</p>
+                {% for choice in question.choices.all %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="question-{{ question.id }}" value="{{ choice.text }}">
+                    <label class="form-check-label">{{ choice.text }}</label>
+                    {% if choice.is_correct %}
+                    <span class="visually-hidden correct-answer">{{ choice.text }}</span>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary mt-3" disabled id="submit-button">Submit</button>
+    </form>
+</div>
+
+<script>
+    const timerSpan = document.getElementById('timer');
+    const form = document.getElementById('quiz-form');
+    const scoreInput = document.getElementById('user-score');
+    const submitButton = document.getElementById('submit-button');
+    const questions = document.querySelectorAll('.question');
+
+    let duration = 120;
+    const interval = setInterval(updateTimer, 1000);
+
+    function updateTimer() {
+        const minutes = Math.floor(duration / 60);
+        const seconds = duration % 60;
+        timerSpan.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        
+        if (duration <= 0) {
+            clearInterval(interval);
+            submitQuiz();
+        }
+        duration--;
+    }
+
+    function submitQuiz() {
+        let allAnswered = true;
+
+        questions.forEach(question => {
+            const selected = question.querySelector('input:checked');
+            if (!selected) {
+                allAnswered = false;
+            }
+        });
+
+        if (allAnswered) {
+            calculateScore()
+        } else {
+            alert("Please answer all questions before time runs out.");
+            form.submit();
+        }
+    }
+
+    function calculateScore() {
+        let score = 0;
+
+        questions.forEach(question => {
+            const selected = question.querySelector('input:checked');
+            const correct = question.querySelector('.correct-answer').textContent;
+            if (selected && selected.value === correct) score++;
+        });
+
+        scoreInput.value = score;
+        form.submit();
+    }
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        calculateScore();
+    });
+
+    // Enable submit button when all questions are answered
+    questions.forEach(question => {
+        question.addEventListener('change', () => {
+            let allAnswered = true;
+            questions.forEach(q => {
+                if (!q.querySelector('input:checked')) {
+                    allAnswered = false;
+                }
+            });
+            submitButton.disabled = !allAnswered;
+        });
+    });
+</script>
+{% endblock %}
