@@ -22,19 +22,16 @@
                 {% endif %}
 
                 <!-- Profile Image -->
-                {% if request.user.is_authenticated %}
-                    {% if request.user.profile.profile_img %}
-                        <a href="{% url 'profile' request.user.username %}" class="btn btn-outline-primary ms-2">
-                            <img src="{{ request.user.profile.profile_img.url }}" 
-                                class="rounded-circle" width="30" height="30" alt="Profile">
-                        </a>
+                <div class="mb-3 text-center">
+                    {% if user_profile.profile_img %}
+                        <img src="{{ user_profile.profile_img.url }}" 
+                             class="rounded-circle mb-3" width="100" height="100" alt="Profile Picture">
                     {% else %}
-                        <a href="{% url 'profile' request.user.username %}" class="btn btn-outline-primary ms-2">
-                            <img src="{% static 'images/user.svg' %}" class="rounded-circle" width="30" height="30" alt="Default Profile">
-                        </a>
+                        <img src="{% static 'images/user.svg' %}" 
+                             class="rounded-circle mb-3" width="100" height="100" alt="Default Profile Picture">
                     {% endif %}
-                {% endif %}
-            
+                    <input type="file" name="profile_img" class="form-control">
+                </div>
 
                 <!-- Username -->
                 <div class="mb-3">
