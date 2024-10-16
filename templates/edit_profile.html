@@ -1,4 +1,5 @@
 {% extends 'index.html' %}
+{% load static %}
 
 {% block title %}{{ request.user.username }} - Edit Profile{% endblock title %}
 
@@ -21,12 +22,19 @@
                 {% endif %}
 
                 <!-- Profile Image -->
-                <div class="mb-3 text-center">
-                    <img src="{{ user_profile.profile_img.url }}" 
-                         alt="profile-pic" 
-                         width="150" height="150" class="rounded-circle mb-3">
-                    <input type="file" name="profile_img" class="form-control">
-                </div>
+                {% if request.user.is_authenticated %}
+                    {% if request.user.profile.profile_img %}
+                        <a href="{% url 'profile' request.user.username %}" class="btn btn-outline-primary ms-2">
+                            <img src="{{ request.user.profile.profile_img.url }}" 
+                                class="rounded-circle" width="30" height="30" alt="Profile">
+                        </a>
+                    {% else %}
+                        <a href="{% url 'profile' request.user.username %}" class="btn btn-outline-primary ms-2">
+                            <img src="{% static 'images/user.svg' %}" class="rounded-circle" width="30" height="30" alt="Default Profile">
+                        </a>
+                    {% endif %}
+                {% endif %}
+            
 
                 <!-- Username -->
                 <div class="mb-3">

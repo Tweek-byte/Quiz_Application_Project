@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import update_session_auth_hash
 from .models import Profile
+from django.contrib.auth import logout
 
 def register(request):
     """Signing Up Logic."""

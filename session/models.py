@@ -12,6 +12,10 @@ class Profile(models.Model):
         null=True,
         verbose_name='User_pic'
     )
+    def profile_img_url(self):
+        if self.profile_img and self.profile_img.name != '':
+            return self.profile_img.url
+        return '/static/images/user.svg'
 
     email_address = models.CharField(max_length=55, unique=True, null=True, verbose_name='Email')
 
