@@ -68,5 +68,45 @@ def login(request):
 
 @login_required
 def logout(request):
+    """Logging out Logic"""
     auth.logout(request)
     return (redirect('login'))
+
+@login_required
+def edit_profile(request, username):
+    """Edit Profile Logic."""
+    user_profile = Profile.objects.get(user=request.user)
+
+    if request.method == "POST":
+
+        username = request.POST['username']
+        if username != request.user.username:
+            if User.objects.filter(username=username).exists():
+                messages.error(request, "Username already taken!")
+                return redirect('edit_profile')
+            request.user.username = username
+
+ 
+        password = request.POST['password']
+        if password:
+            request.user.set_password(password)
+
+
+        user_profile.age = request.POST['age']
+        user_profile.gender = request.POST['gender']
+
+
+        request.user.save()
+        user_profile.save()
+
+        messages.success(request, "Profile updated successfully!")
+
+        if password:
+            user = auth.authenticate(username=request.user.username, password=password)
+            if user:
+                auth.login(request, user)
+
+        return redirect('profile', request.user.username)
+
+    context = {"user_profile": user_profile}
+    return render(request, 'edit_profile.html', context)
