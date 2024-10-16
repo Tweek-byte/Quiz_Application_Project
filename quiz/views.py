@@ -9,4 +9,12 @@ def quizzes_list(request):
     categories = Category.objects.all()
 
     context = {"quizzes": quizzes, "categories": categories}
-    return render(request, 'quizzes_list.html', context)  
+    return render(request, 'quizzes_list.html', context)
+
+@login_required
+def search(request):
+    """Logic for quizzes list search function"""
+    context={
+        
+    }
+    return (render(request, 'quizzes_list.html', context))
