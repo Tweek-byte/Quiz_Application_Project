@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Quiz, Category
+from .models import Quiz, Category, QuizCompleted
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from session.models import Profile
 from django.db.models import Q
 import pandas as p
 
@@ -36,6 +34,17 @@ def search(request, category):
     return render(request, 'quizzes_list.html', context)
 
 @login_required
-def quiz_page(request):
+def quiz_page(request, quiz_id):
     """quiz page logic"""
-    return (render(request, 'quiz_page.html'))
+    qv = get_object_or_404(Quiz, pk=quiz_id)
+
+    if request.method == "POST":
+
+        score = int(request.POST.get('score', 0))
+
+        submission = QuizCompleted(user=request.user, quiz=qv, score=score)
+        submission.save()
+
+        return redirect('quiz_result.html', submission_id=submission.id)
+
+    return (render(request, 'quiz_page.html', {'quiz': qv}))

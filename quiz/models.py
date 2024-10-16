@@ -1,6 +1,7 @@
 """Quiz Models"""
 from django.db import models
 import pandas as pd
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=15)
@@ -77,3 +78,13 @@ class Choice(models.Model):
 
     def __str__(self):
         return f"{self.question.text[:50]} - {self.text[:20]}"
+
+class QuizCompleted(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    score = models.IntegerField()
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user}, {self.quiz.name}"
+
