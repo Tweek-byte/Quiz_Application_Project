@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from session.models import Profile
 from django.db.models import Q
+import pandas as p
 
 @login_required
 def quizzes_list(request):

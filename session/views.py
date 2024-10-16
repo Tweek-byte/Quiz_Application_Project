@@ -128,8 +128,10 @@ def edit_profile(request, username):
 
 
 @login_required
-def delete_profile(request):
+def delete_profile(request, username):
     """Account Deletion Confirmation Logic."""
+    user = get_object_or_404(User, username=username)
+
     if request.method == "POST":
 
         user = request.user
