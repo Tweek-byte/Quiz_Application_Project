@@ -30,7 +30,7 @@
             {% if request.user.username == user_profile.user.username %}
             <div class="btn-group mt-4" role="group" aria-label="Profile actions">
                 <a href="{% url 'edit_profile' request.user.username %}" class="btn btn-primary">Edit Profile</a>
-                <a href="#" class="btn btn-danger">Delete Account</a>
+                <a href="{% url 'delete_profile' %}" class="btn btn-danger">Delete Account</a>
             </div>
             {% endif %}
         </div>

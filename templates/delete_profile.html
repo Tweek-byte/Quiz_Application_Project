@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+
+{% block title %}Confirm Account Deletion{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="display-4 text-center text-danger">Delete Your Account</h1>
+    <p class="lead text-center">Are you sure you want to delete your account? This action is irreversible!</p>
+
+    <div class="d-flex justify-content-center mt-4">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, Delete My Account</button>
+            <a href="{% url 'profile' request.user.username %}" class="btn btn-secondary ms-3">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

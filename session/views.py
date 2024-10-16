@@ -118,3 +118,18 @@ def edit_profile(request, username):
 
     context = {"user_profile": user_profile}
     return render(request, 'edit_profile.html', context)
+
+
+@login_required
+def delete_profile(request):
+    """Account Deletion Confirmation Logic."""
+    if request.method == "POST":
+
+        user = request.user
+        user.delete()
+        messages.success(request, "Your account has been deleted successfully.")
+
+        logout(request)
+        return redirect('login')
+
+    return render(request, 'delete_profile.html')
