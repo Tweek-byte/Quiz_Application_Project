@@ -88,3 +88,10 @@ class QuizCompleted(models.Model):
     def __str__(self):
         return f"{self.user}, {self.quiz.name}"
 
+class ProfileRank(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    rank = models.IntegerField(null=True, blank=True)
+    total_score = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.rank}, {self.user.username}"
