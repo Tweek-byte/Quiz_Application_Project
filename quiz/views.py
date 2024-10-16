@@ -34,3 +34,8 @@ def search(request, category):
 
     context = {"quizzes": quizzes, "categories": categories}
     return render(request, 'quizzes_list.html', context)
+
+@login_required
+def quiz_page(request):
+    """quiz page logic"""
+    return (render(request, 'quiz_page.html'))
