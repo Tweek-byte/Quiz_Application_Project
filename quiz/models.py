@@ -2,6 +2,7 @@
 from django.db import models
 import pandas as pd
 from django.contrib.auth.models import User
+from django.db.models import Sum
 
 class Category(models.Model):
     name = models.CharField(max_length=15)
@@ -95,3 +96,20 @@ class ProfileRank(models.Model):
 
     def __str__(self):
         return f"{self.rank}, {self.user.username}"
+    
+    
+def update_ranking():
+    """Updates the Profile's score and its ranking"""
+    user_scores = (QuizCompleted.objects.values('user').annotate(total_score=Sum('score')).order_by('-total_score'))
+
+    rank = 1
+    for entry in user_scores:
+        user_id = entry['user']
+        total_score = entry['total_score']
+
+        user_rank, created = ProfileRank.objects.get_or_create(user_id=user_id)
+        user_rank.rank = rank
+        user_rank.total_score = total_score
+        user_rank.save()
+
+        rank += 1
