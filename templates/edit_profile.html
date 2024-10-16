@@ -11,7 +11,7 @@
             <form action="" method="POST">
                 {% csrf_token %}
 
-                <!-- Display Error Messages -->
+                <!-- Display Error/Success Messages -->
                 {% if messages %}
                     <div class="mb-3">
                         {% for message in messages %}
