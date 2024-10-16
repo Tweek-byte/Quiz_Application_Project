@@ -9,12 +9,12 @@
         <div class="d-flex flex-wrap justify-content-center mb-4">
             <a href="{% url 'quizzes_list' %}" class="btn btn-light btn-sm m-1">Categories</a>
             {% for category in categories %}
-                <a href="./quizzes_list.html" class="btn btn-outline-primary btn-sm m-1">{{ category.name }}</a>
+                <a href="{% url 'search' category.name %}" class="btn btn-outline-primary btn-sm m-1">{{ category.name }}</a>
             {% endfor %}
         </div>
 
-        <form class="d-flex justify-content-center mb-5" role="search" method="get" action="#">
-            <input 
+        <form class="d-flex justify-content-center mb-5" role="search" method="get" action="{% url 'search' ' ' %}">
+            <input
                 name="q" 
                 class="form-control w-50 me-2" 
                 type="search" 
