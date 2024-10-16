@@ -7,6 +7,7 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth import update_session_auth_hash
 from .models import Profile
 from django.contrib.auth import logout
+from django.shortcuts import get_object_or_404
 
 def register(request):
     """Signing Up Logic."""
@@ -46,10 +47,16 @@ def register(request):
 @login_required
 def profile(request, username):
     """Profile Dashboard Logic."""
-    user_obj = User.objects.get(username=username)
-    user_profile = Profile.objects.get(user=user_obj)
-    
-    context = {"user_profile": user_profile}
+    user_obj = get_object_or_404(User, username=username)
+    try:
+        user_profile = Profile.objects.get(user=user_obj)
+    except Profile.DoesNotExist:
+        user_profile = None
+
+    context = {
+        'user_profile': user_profile,
+        'user_obj': user_obj,
+        }
     return (render(request, 'profile.html', context))
 
 def login(request):
