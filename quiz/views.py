@@ -1,6 +1,12 @@
 from django.shortcuts import render
-from .models import Quiz
+from .models import Quiz, Category
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def quizzes_list(request):
-    quizzes = Quiz.objects.select_related('category').order_by('-created_at')
-    return render(request, 'quizzes_list.html', {'quizzes': quizzes})
+    """Logic for showing list of quizzes"""
+    quizzes = Quiz.objects.order_by('-created_at')
+    categories = Category.objects.all()
+
+    context = {"quizzes": quizzes, "categories": categories}
+    return render(request, 'quizzes_list.html', context)  
