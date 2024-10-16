@@ -17,6 +17,7 @@ class Quiz(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='quizzes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    quiz_f = models.FileField(upload_to='quiz/', null=True)
 
     class Meta:
         verbose_name_plural = "Quizzes"
@@ -24,6 +25,13 @@ class Quiz(models.Model):
     def __str__(self):
         return self.name
 
+    def save_quiz(self, *args, **kwargs):
+        super().save_quiz(*args, **kwargs)
+        if self.quiz_f:
+            self.quiz_file()
+            
+    def quiz_file():
+        pass
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')
