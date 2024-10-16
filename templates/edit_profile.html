@@ -1,6 +1,6 @@
 {% extends 'index.html' %}
 
-{% block title %}@{{ request.user.username }} - Edit Profile{% endblock title %}
+{% block title %}{{ request.user.username }} - Edit Profile{% endblock title %}
 
 {% block content %}
 <h1 class="display-4 text-center my-5">Edit Profile</h1>
@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8 col-sm-12">
-            <form action="" method="POST">
+            <form action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <!-- Display Error/Success Messages -->
@@ -20,21 +20,37 @@
                     </div>
                 {% endif %}
 
+                <!-- Profile Image -->
+                <div class="mb-3 text-center">
+                    <img src="{{ user_profile.profile_img.url }}" 
+                         alt="profile-pic" 
+                         width="150" height="150" class="rounded-circle mb-3">
+                    <input type="file" name="profile_img" class="form-control">
+                </div>
+
                 <!-- Username -->
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" name="username" 
                            value="{{ user_profile.user.username }}" 
                            class="form-control" 
-                           id="username" placeholder="Username" required>
+                           id="username" required>
                 </div>
 
-                <!-- Password -->
+                <!-- Old Password -->
+                <div class="mb-3">
+                    <label for="oldPassword" class="form-label">Old Password</label>
+                    <input type="password" name="old_password" 
+                           class="form-control" id="oldPassword" 
+                           placeholder="Old Password">
+                </div>
+
+                <!-- New Password -->
                 <div class="mb-3">
                     <label for="password" class="form-label">New Password</label>
                     <input type="password" name="password" 
-                           class="form-control" 
-                           id="password" placeholder="New Password (Optional)">
+                           class="form-control" id="password" 
+                           placeholder="New Password">
                 </div>
 
                 <!-- Age -->
@@ -42,8 +58,7 @@
                     <label for="age" class="form-label">Age</label>
                     <input type="number" name="age" 
                            value="{{ user_profile.age }}" 
-                           class="form-control" 
-                           id="age" placeholder="Age" required>
+                           class="form-control" id="age" required>
                 </div>
 
                 <!-- Gender -->

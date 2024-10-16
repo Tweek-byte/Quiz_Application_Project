@@ -2,8 +2,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
-from .models import Profile
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
+from django.contrib.auth import update_session_auth_hash
+from .models import Profile
 
 def register(request):
     """Signing Up Logic."""
@@ -79,34 +81,39 @@ def edit_profile(request, username):
 
     if request.method == "POST":
 
-        username = request.POST['username']
+        username = request.POST.get('username', request.user.username)
         if username != request.user.username:
             if User.objects.filter(username=username).exists():
                 messages.error(request, "Username already taken!")
-                return redirect('edit_profile')
+                return redirect('edit_profile', username=request.user.username)
             request.user.username = username
 
- 
-        password = request.POST['password']
-        if password:
-            request.user.set_password(password)
+
+        old_password = request.POST.get('old_password')
+        new_password = request.POST.get('password')
+        if old_password and new_password:
+            if check_password(old_password, request.user.password):
+                request.user.set_password(new_password)
+                messages.success(request, "Password updated successfully!")
+                update_session_auth_hash(request, request.user)
+            else:
+                messages.error(request, "Old password is incorrect!")
+                return redirect('edit_profile', username=request.user.username)
 
 
-        user_profile.age = request.POST['age']
-        user_profile.gender = request.POST['gender']
+        if request.FILES.get('profile_img'):
+            user_profile.profile_img = request.FILES['profile_img']
+
+
+        user_profile.age = request.POST.get('age', user_profile.age)
+        user_profile.gender = request.POST.get('gender', user_profile.gender)
 
 
         request.user.save()
         user_profile.save()
 
         messages.success(request, "Profile updated successfully!")
-
-        if password:
-            user = auth.authenticate(username=request.user.username, password=password)
-            if user:
-                auth.login(request, user)
-
-        return redirect('profile', request.user.username)
+        return redirect('profile', username=request.user.username)
 
     context = {"user_profile": user_profile}
     return render(request, 'edit_profile.html', context)
