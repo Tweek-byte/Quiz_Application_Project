@@ -11,7 +11,7 @@
     </p>
     {% if request.user.is_authenticated %}
     <div class="d-inline-flex gap-2">
-        <a href="#"
+        <a href="{% url 'quizzes_list' %}"
         class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill"
         style="margin-top: 20px;">Take a Quiz</a>
 
