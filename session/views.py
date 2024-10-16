@@ -130,6 +130,6 @@ def delete_profile(request):
         messages.success(request, "Your account has been deleted successfully.")
 
         logout(request)
-        return redirect('login')
+        return redirect('register')
 
     return render(request, 'delete_profile.html')
