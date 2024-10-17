@@ -8,7 +8,7 @@ from django.contrib.auth import update_session_auth_hash
 from .models import Profile
 from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404
-from quiz.models import ProfileRank
+from quiz.models import ProfileRank, QuizCompleted
 
 def register(request):
     """Register Logic"""
@@ -50,8 +50,10 @@ def profile(request, username):
 
     user_rank = ProfileRank.objects.filter(user=user_obj).first()
 
+    completed_quizzes = QuizCompleted.objects.filter(user=user_obj).order_by('-submitted_at')
     context = {
         'user_profile': user_profile,
+        'completed_quizzes': completed_quizzes,
         'user_obj': user_obj,
         'user_rank': user_rank,
     }

@@ -62,8 +62,8 @@
                                 <th scope="row">{{ forloop.counter }}</th>
                                 <td>{{ quiz.quiz.name }}</td>
                                 <td>{{ quiz.score }}</td>
-                                <td>{{ quiz.completed_at|date:"Y-m-d H:i" }}</td>
-                                <td><a href="{% url 'quiz_detail' quiz.quiz.id %}">Details</a></td>
+                                <td>{{ quiz.submitted_at|date:"Y-m-d H:i" }}</td>
+                                <td><a href="{% url 'quiz_result' quiz.id %}">Details</a></td>
                             </tr>
                         {% endfor %}
                     {% else %}
