@@ -2,7 +2,7 @@
 # Quizora
 
 <p align="center">
-  <img src="path_to_your_logo.png" alt="Quizora Logo" style="width: 100%; height: auto;" />
+  <img src="Github/assets/images/quizora_logo.png" alt="Quizora Logo" style="width: 100%; height: auto;" />
 </p>
 
 An interactive educational quiz app designed to engage and educate!
