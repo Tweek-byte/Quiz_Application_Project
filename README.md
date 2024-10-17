@@ -139,9 +139,3 @@ Quiz_Application_Project/
 - **Add Social Login:** Enable users to log in with Google or Facebook.
 - **Implement Quiz Categories:** Offer quizzes by topic or difficulty level.
 - **Mobile App Version:** Develop a mobile app for iOS and Android.
-
-## License
-
-    ```bash
-    Project is protected under license
-    ```
