@@ -2,7 +2,7 @@
 # Quizora
 
 <p align="center">
-  <img src="Github/assets/images/quizora_logo.jpg" alt="Quizora Logo" width="300">
+  <img src="path_to_your_logo.png" alt="Quizora Logo" style="width: 100%; height: auto;" />
 </p>
 
 An interactive educational quiz app designed to engage and educate!
@@ -141,5 +141,6 @@ Quiz_Application_Project/
 - **Mobile App Version:** Develop a mobile app for iOS and Android.
 
 ## License
-    ```Project is protected under license
+    ```bash
+    Project is protected under license
     ```
