@@ -8,9 +8,10 @@ from django.contrib.auth import update_session_auth_hash
 from .models import Profile
 from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404
+from quiz.models import ProfileRank
 
 def register(request):
-    """Signing Up Logic."""
+    """Register Logic"""
     if request.method == "POST":
         username = request.POST['username']
         email = request.POST['email']
@@ -18,46 +19,43 @@ def register(request):
         confirm_password = request.POST['confirm_password']
 
         if password == confirm_password:
-                if User.objects.filter(username=username).exists():
-                    messages.info(request, "Username already exists! Try Logging in.")
-                    return redirect('register')
-                
-                elif User.objects.filter(email=email).exists():
-                    messages.info(request, "Email already exists! Try Logging in.")
-                    return redirect('register')
-                else:
-                    user = User.objects.create_user(username=username, email=email, password=password)
-                    user.save()
-                    
-                    user_login = auth.authenticate(username=username, password=password)
-                    auth.login(request, user_login)
+            if User.objects.filter(username=username).exists():
+                messages.info(request, "Username already exists! Try Logging in.")
+                return redirect('register')
+            elif User.objects.filter(email=email).exists():
+                messages.info(request, "Email already exists! Try Logging in.")
+                return redirect('register')
+            else:
+                user = User.objects.create_user(username=username, email=email, password=password)
+                user.save()
 
+                user_login = auth.authenticate(username=username, password=password)
+                auth.login(request, user_login)
 
-                    user_model = User.objects.get(username=username)
-                    new_profile = Profile.objects.create(user=user_model, email_address=email)
-                    new_profile.save()
-                    return redirect('profile', username)
+                Profile.objects.create(user=user, email_address=email, age=None, gender=None)
+
+                return redirect('profile', username=username)
         else:
-            messages.info(request, "Failed to confirm password!")
+            messages.info(request, "Passwords do not match!")
             return redirect('register')
 
-    context = {}
-    return render(request, "register.html", context)
+    return render(request, "register.html")
 
 @login_required
 def profile(request, username):
-    """Profile Dashboard Logic."""
+    """Profile Dashboard"""
     user_obj = get_object_or_404(User, username=username)
-    try:
-        user_profile = Profile.objects.get(user=user_obj)
-    except Profile.DoesNotExist:
-        user_profile = None
+
+    user_profile, created = Profile.objects.get_or_create(user=user_obj)
+
+    user_rank = ProfileRank.objects.filter(user=user_obj).first()
 
     context = {
         'user_profile': user_profile,
         'user_obj': user_obj,
-        }
-    return (render(request, 'profile.html', context))
+        'user_rank': user_rank,
+    }
+    return render(request, 'profile.html', context)
 
 def login(request):
     "login Logic."""
@@ -84,11 +82,10 @@ def logout(request):
 
 @login_required
 def edit_profile(request, username):
-    """Edit Profile Logic."""
+    """Edit Profile Logic"""
     user_profile = Profile.objects.get(user=request.user)
 
     if request.method == "POST":
-
         username = request.POST.get('username', request.user.username)
         if username != request.user.username:
             if User.objects.filter(username=username).exists():
@@ -96,26 +93,21 @@ def edit_profile(request, username):
                 return redirect('edit_profile', username=request.user.username)
             request.user.username = username
 
-
         old_password = request.POST.get('old_password')
         new_password = request.POST.get('password')
         if old_password and new_password:
             if check_password(old_password, request.user.password):
                 request.user.set_password(new_password)
-                messages.success(request, "Password updated successfully!")
                 update_session_auth_hash(request, request.user)
             else:
                 messages.error(request, "Old password is incorrect!")
                 return redirect('edit_profile', username=request.user.username)
 
-
         if request.FILES.get('profile_img'):
             user_profile.profile_img = request.FILES['profile_img']
 
-
         user_profile.age = request.POST.get('age', user_profile.age)
         user_profile.gender = request.POST.get('gender', user_profile.gender)
-
 
         request.user.save()
         user_profile.save()
@@ -123,8 +115,7 @@ def edit_profile(request, username):
         messages.success(request, "Profile updated successfully!")
         return redirect('profile', username=request.user.username)
 
-    context = {"user_profile": user_profile}
-    return render(request, 'edit_profile.html', context)
+    return render(request, 'edit_profile.html', {"user_profile": user_profile})
 
 
 @login_required

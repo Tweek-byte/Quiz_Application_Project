@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mt-4">Leaderboard</h2>
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th scope="col">Rank</th>
+                <th scope="col">User</th>
+                <th scope="col">Score</th>
+                <th scope="col">Profile Picture</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ranking in rankings %}
+                <tr>
+                    <td>{{ ranking.rank }}</td>
+                    <td>{{ ranking.user.username }}</td>
+                    <td>{{ ranking.total_score }}</td>
+                    <td>
+                        <img src="{{ ranking.user.profile.profile_img.url|default:'/static/images/user.svg' }}" alt="Profile Picture" class="rounded-circle" width="40" height="40">
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">No users found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

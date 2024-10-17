@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Quiz, Category, QuizCompleted
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from .models import ProfileRank, update_ranking
 
 @login_required
 def quizzes_list(request):
@@ -38,6 +39,9 @@ def quiz_page(request, quiz_id):
         score = int(request.POST.get('score', 0))
         submission = QuizCompleted(user=request.user, quiz=quiz, score=score)
         submission.save()
+
+        update_ranking()
+
         return redirect('quiz_result', submission_id=submission.id)
 
     return render(request, 'quiz_page.html', {'quiz': quiz})
@@ -55,3 +59,13 @@ def quiz_result(request, submission_id):
         'incorrect_answers': total_questions - submission.score
     }
     return render(request, 'quiz_result.html', context)
+
+@login_required
+def leaderboard(request):
+    """View to display the leaderboard."""
+    rankings = ProfileRank.objects.select_related('user').order_by('rank')
+
+    context = {
+        'rankings': rankings,
+    }
+    return render(request, 'leaderboard.html', context)

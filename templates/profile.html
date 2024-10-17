@@ -4,11 +4,11 @@
 
 {% block content %}
 <div class="container my-5">
-    <h1 class="display-4 text-center mb-4">{{ user_profile.user.username }}'s Profile</h1>
+    <h1 class="display-4 text-center mb-4">{{ user_profile.user.username|default:"Anonymous User" }}'s Profile</h1>
 
     <div class="card mx-auto shadow-sm" style="max-width: 600px;">
         <div class="card-body text-center">
-            <img src="{{user_profile.profile_img.url}}" alt="user-profile" class="rounded-circle mb-3" width="140" height="140">
+            <img src="{{ user_profile.profile_img.url|default:'/static/images/user.svg' }}" alt="user-profile" class="rounded-circle mb-3" width="140" height="140">
             <h2 class="fs-3">@{{ user_profile.user.username }}</h2>
             <div class="row justify-content-center mt-4">
                 <div class="col-md-6 mb-2">
@@ -56,13 +56,23 @@
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr>
-                        <td colspan="5" class="text-center">No quizzes completed yet.</td>
-                    </tr>
+                    {% if completed_quizzes %}
+                        {% for quiz in completed_quizzes %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ quiz.quiz.name }}</td>
+                                <td>{{ quiz.score }}</td>
+                                <td>{{ quiz.completed_at|date:"Y-m-d H:i" }}</td>
+                                <td><a href="{% url 'quiz_detail' quiz.quiz.id %}">Details</a></td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center">No quizzes completed yet.</td>
+                        </tr>
+                    {% endif %}
                 </tbody>
             </table>
         </div>
     </div>
-</div>
 {% endblock content %}

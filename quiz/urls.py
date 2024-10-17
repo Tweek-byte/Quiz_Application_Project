@@ -6,5 +6,6 @@ urlpatterns = [
     path('take', views.quiz_page, name='quiz_page'),
     path('search/<str:category>', views.search, name='search'),
     path('<int:quiz_id>/', views.quiz_page, name='quiz'),
-    path('result/<int:submission_id>/', views.quiz_result, name='quiz_result')
+    path('result/<int:submission_id>/', views.quiz_result, name='quiz_result'),
+    path('leaderboard/', views.leaderboard, name='leaderboard'),
 ]
