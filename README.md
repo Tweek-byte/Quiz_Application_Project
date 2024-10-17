@@ -2,14 +2,14 @@
 # Quizora
 
 <p align="center">
-  <img src="logo_path_here" alt="Quizora Logo" width="300">
+  <img src="Github/assets/images/quizora_main.png" alt="Quizora Logo" width="300">
 </p>
 
 An interactive educational quiz app designed to engage and educate!
 
 ## Overview
 
-Quizora is a feature-rich quiz application built using Django, designed to offer an engaging and interactive quiz experience. It includes user authentication, session tracking, and a dynamic leaderboard that encourages friendly competition. This project was developed to demonstrate web development skills with a focus on Python, Django, HTML/CSS, and JavaScript.
+Quizora is a feature-rich quiz application built using Django, designed to offer an engaging and interactive quiz experience. It includes user authentication, session tracking, and a dynamic leaderboard that encourages friendly competition. This project was developed for thee AlX Program Final Project to demonstrate and sharpen web development skills with a focus on Python, Django, HTML/CSS, and JavaScript.
 
 ## Features
 
