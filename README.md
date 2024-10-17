@@ -93,7 +93,7 @@ Quizora is a feature-rich quiz application built using Django, designed to offer
 7. **Run the development server:**
 
    ```bash
-   python manage.py runserver
+   This project is protected under license
    ```
 
 ## Usage
