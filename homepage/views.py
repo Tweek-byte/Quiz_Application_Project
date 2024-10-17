@@ -1,5 +1,5 @@
 from django.shortcuts import render
 
 def home(request):
-    """Home Page Logic"""
-    return render(request, 'homepage.html')
+    """Homepage logic."""
+    return (render(request, 'homepage.html'))

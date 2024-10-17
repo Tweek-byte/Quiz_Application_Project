@@ -11,7 +11,7 @@ def quizzes_list(request):
     categories = Category.objects.all()
 
     context = {"quizzes": quizzes, "categories": categories}
-    return render(request, 'quizzes_list.html', context)
+    return (render(request, 'quizzes_list.html', context))
 
 @login_required
 def search(request, category):
@@ -28,7 +28,7 @@ def search(request, category):
 
     categories = Category.objects.all()
     context = {"quizzes": quizzes, "categories": categories}
-    return render(request, 'quizzes_list.html', context)
+    return (render(request, 'quizzes_list.html', context))
 
 @login_required
 def quiz_page(request, quiz_id):
@@ -42,9 +42,9 @@ def quiz_page(request, quiz_id):
 
         update_ranking()
 
-        return redirect('quiz_result', submission_id=submission.id)
+        return (redirect('quiz_result', submission_id=submission.id))
 
-    return render(request, 'quiz_page.html', {'quiz': quiz})
+    return (render(request, 'quiz_page.html', {'quiz': quiz}))
 
 @login_required
 def quiz_result(request, submission_id):
@@ -58,7 +58,7 @@ def quiz_result(request, submission_id):
         'correct_answers': submission.score,
         'incorrect_answers': total_questions - submission.score
     }
-    return render(request, 'quiz_result.html', context)
+    return (render(request, 'quiz_result.html', context))
 
 @login_required
 def leaderboard(request):
@@ -68,4 +68,4 @@ def leaderboard(request):
     context = {
         'rankings': rankings,
     }
-    return render(request, 'leaderboard.html', context)
+    return (render(request, 'leaderboard.html', context))

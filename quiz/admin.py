@@ -1,8 +1,7 @@
-"""Administration Panel Modems register"""
+"""Administration panel models register."""
 from django.contrib import admin
 from .models import Category, Quiz, Question, Choice, QuizCompleted, ProfileRank
 
-# Register your models here.
 admin.site.register(Category)
 admin.site.register(Quiz)
 admin.site.register(Question)
