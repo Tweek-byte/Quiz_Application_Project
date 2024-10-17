@@ -2,7 +2,7 @@
 # Quizora
 
 <p align="center">
-  <img src="Github/assets/images/quizora_main.png" alt="Quizora Logo" width="300">
+  <img src="Github/assets/images/quizora_logo.png" alt="Quizora Logo" width="300">
 </p>
 
 An interactive educational quiz app designed to engage and educate!
@@ -30,7 +30,7 @@ Quizora is a feature-rich quiz application built using Django, designed to offer
 ## Logo Showcase
 
 <p align="center">
-  <img src="Github/assets/images/quizora_logo.jpg" alt="Quizora Logo with Tech Icons" width="400">
+  <img src="Github/assets/images/quizora_main.png" alt="Quizora Logo with Tech Icons" width="400">
 </p>
 
 ## Installation and Setup
