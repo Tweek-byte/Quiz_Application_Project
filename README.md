@@ -141,6 +141,7 @@ Quiz_Application_Project/
 - **Mobile App Version:** Develop a mobile app for iOS and Android.
 
 ## License
+
     ```bash
     Project is protected under license
     ```
