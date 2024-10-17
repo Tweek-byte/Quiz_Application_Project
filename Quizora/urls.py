@@ -25,7 +25,8 @@ urlpatterns = [
     path('', include('homepage.urls')),
     path('user/', include('session.urls')),
     path('quizzes/', include('quiz.urls')),
-     path('terms-and-conditions/', TemplateView.as_view(template_name='terms_and_conditions.html'), name='terms'),
+    path('terms-and-conditions/', TemplateView.as_view(template_name='terms_and_conditions.html'), name='terms'),
+    path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

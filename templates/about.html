@@ -1,0 +1,59 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">About Us</h1>
+    <p class="lead text-center mx-auto" style="max-width: 700px;">
+        Learn more about our mission, vision, and what makes our Quiz App special.
+    </p>
+
+    <div class="row my-5 align-items-center">
+        <div class="col-md-6">
+            <h3 class="text-center text-md-start">Our Mission</h3>
+            <p class="text-muted">
+                At Quiz App, our mission is to make learning fun, engaging, and accessible to everyone. 
+                Whether you're here to test your knowledge, challenge friends, or learn something new, 
+                we've got quizzes tailored just for you.
+            </p>
+        </div>
+        <div class="col-md-6 text-center">
+            <img src="{% static 'images/fun-quiz.png' %}" alt="Quiz Fun Image" 
+                 class="img-fluid rounded" style="max-width: 70%; height: auto;">
+        </div>
+    </div>
+
+    <div class="row my-5 align-items-center">
+        <div class="col-md-6 text-center">
+            <img src="{% static 'images/Quiz_p.jpg' %}" alt="Quiz Community" 
+                 class="img-fluid rounded" style="max-width: 70%; height: auto;">
+        </div>
+        <div class="col-md-6">
+            <h3 class="text-center text-md-start">Our Vision</h3>
+            <p class="text-muted">
+                We aim to build a vibrant community of learners and quiz enthusiasts. 
+                Through engaging quizzes and friendly competition on the leaderboard, 
+                we want to inspire curiosity and lifelong learning.
+            </p>
+        </div>
+    </div>
+
+    <div class="text-center my-5">
+        <h3>Why Choose Us?</h3>
+        <ul class="list-group list-group-flush mx-auto" style="max-width: 500px;">
+            <li class="list-group-item">Interactive and user-friendly quizzes</li>
+            <li class="list-group-item">Compete with friends on the leaderboard</li>
+            <li class="list-group-item">Wide range of categories and topics</li>
+            <li class="list-group-item">Learn something new every day!</li>
+        </ul>
+    </div>
+
+    <div class="text-center my-5">
+        <h3>Get in Touch</h3>
+        <p class="text-muted">
+            If you have any feedback, suggestions, or just want to say hi, feel free to reach out to us at 
+            <a href="mailto:support@quizapp.com">zaka4396@gmail.com</a>.
+        </p>
+    </div>
+</div>
+{% endblock %}
