@@ -18,12 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('homepage.urls')),
     path('user/', include('session.urls')),
-    path('quizzes/', include('quiz.urls'))
+    path('quizzes/', include('quiz.urls')),
+     path('terms-and-conditions/', TemplateView.as_view(template_name='terms_and_conditions.html'), name='terms'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
