@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-eh9g78g^p*s^*8os2z*mc$7^te4(n6oggr56y&yz0uu+@g3=^)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['quiz-application-project-tsyd.onrender.com']
+ALLOWED_HOSTS = ['quiz-application-project-tsyd.onrender.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -78,14 +78,11 @@ WSGI_APPLICATION = 'Quizora.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '<database_name>',
-        'USER': '<username>',
-        'PASSWORD': '<password>',
-        'HOST': '<hostname>',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 
 # Password validation
